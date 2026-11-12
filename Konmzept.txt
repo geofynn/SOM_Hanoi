@@ -1,0 +1,33 @@
+Eine main.py Datei über die das Spiel gestartet wird und die Parameterauswahl gemacht wird.
+
+Eine Klasse für das Spielfeld.
+Parameter:
+Datenstruktur für den Spielfeldzustand.
+
+
+Methoden:
+Erzeugung des Spielfelds mit Parametern.
+
+Spielregelnmethode die die Eingaben überprüft. Rückgabe mit erneuter Eingabe.
+
+Visualisierung mit pygame.
+
+
+Eine Klasse für den Spieler.
+Eingabe von Spielzügen.
+
+
+
+
+Eine Klasse für die KI-Spielmodus.
+
+Rewardfunktion - Was wie belohnt wird
+100 Punkte für Spiel fertig
+-1 Punkt pro Zug
+-10 für illegalen Move?
+
+
+Trainingsfunktion
+Anzahl der Trainingsiterationen
+
+Vorführfunktion mit Explore=False
