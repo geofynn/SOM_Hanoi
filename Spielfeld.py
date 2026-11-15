@@ -12,6 +12,8 @@ class Spielfeld():
     def check_legal_move(self, start, start_hoehe, ziel, ziel_hoehe):
         if start < 0 or start >= 3 or ziel < 0 or ziel >= 3:
             return False
+        if start == ziel:
+            return False
         if start_hoehe < 0 or start_hoehe >= self.anzahl_Spielsteine or ziel_hoehe < 0 or ziel_hoehe >= self.anzahl_Spielsteine:
             return False
         if self.Feld[start_hoehe, start] == 0:
