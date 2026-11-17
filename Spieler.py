@@ -1,5 +1,16 @@
 from Spielfeld import Spielfeld
 
+#KI-Spieler und Spieler sind zwei separate Klassen
+#Bezug zum Spielfeld 
+
+#Bezug zu AKTIONEN in Spielfeld.py
+#Eingabe von Spielerzug über Konsole
+#Überprüfung legaler Züge über Spielfeld
+#Visualisierung über pygame in Spielfeld
+#keine Reward Funktion - Hinweis nur über illegale Züge
+#Ausgabe über gewonnene Spiele und Anzahl der Züge
+
+
 class Spieler(Spielfeld):
     def __init__(self, anzahl_Spielsteine):
         super().__init__(anzahl_Spielsteine)

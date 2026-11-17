@@ -1,6 +1,8 @@
 import numpy as np
 
-
+AKTIONEN = [(0, 1), (0, 2), (1, 0), (1, 2), (2, 0), (2, 1)]
+            #Stab 1 zu 2; Stab 1 zu 3; Stab 2 zu 1; Stab 2 zu 3; Stab 3 zu 1; Stab 3 zu 2
+            
 class Spielfeld():
     Hintergrund = (30, 30, 46)
     Boden = (90, 90, 110)
