@@ -11,8 +11,6 @@ from Spieler import Spieler
 #Reward_Zug = -1
 #Reward_illegal = -10
 
-#state und action 
-#state_num = 3**Anzahl_Spielsteine
 #action_num = 6
 
 #Klasse KI_Spieler bezieht sich auf Spielfeld bzgl. legale Züge 
@@ -21,13 +19,13 @@ class KI_Spieler(Spielfeld):
         super().__init__(anzahl_Spielsteine)
 
     def get_state(self):
-        for zeile in range(0,self.anzahl_Spielsteine-1):
-            for stab in range(2):
-                self.Feld[zeile,stab]
-
-
-        #KI soll selber Züge ausführen
-
+        state = 0
+        for zeile in range(0,self.anzahl_Spielsteine):
+            for stab in range(3):
+                wert = self.Feld[zeile,stab]
+                if wert !=0:
+                    state += stab*3**(wert-1)
+        return state
 
     def KI_aktion(self, start, ziel):   
         return
