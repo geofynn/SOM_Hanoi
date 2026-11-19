@@ -4,7 +4,7 @@ from Spieler import Spieler
 import gymnasium
 
 #KI-Spieler und Spieler sind zwei separate Klassen
-#Bezug zum Spielfeld 
+#Bezug zum Spielfeld xxxx
 
 #Reward-Funktion
 Reward_Ziel = 100
