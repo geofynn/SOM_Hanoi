@@ -32,4 +32,13 @@ class Spieler(Spielfeld):
         start, ziel = self.eingabe()
         self.zug_ausfuehren(start, ziel)
         
+
+    def spielen(self):
+        self.zeige()                      # Fenster öffnen, Startposition zeigen
+        while not self.ist_geloest():
+            self.Spieler_aktion()         # Zug in der Konsole eingeben
+            self.zeige()                  # Fenster nach dem Zug neu zeichnen
+        print(f"Gewonnen in {self.zuege} Zügen! "
+              f"(optimal: {2 ** self.anzahl_Spielsteine - 1})")
+        
         return
