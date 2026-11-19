@@ -29,7 +29,7 @@ class KI_Spieler(Spielfeld):
 
     def KI_aktion(self, start, ziel):   
         return
-
+ 
 #Bezug zu AKTIONEN in Spielfeld.py
 #Bezug zu state und action 
 #training: keine Visualisierung, nur Berechnung der Züge und Rewards; Pause benötigt, um die Züge zu sehen
