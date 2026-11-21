@@ -42,6 +42,26 @@ class Spielfeld():
                 return False
         return True
 
+#Spieler.py 
+    def zug_ausfuehren(self, start, ziel):
+        if not self.check_legal_move(start, ziel):
+            return False
+        start_zeile = self.oberster_ring(start)
+        ring = self.Feld[start_zeile, start]
+        self.Feld[start_zeile, start] = 0
+
+        ziel_zeile = self.oberster_ring(ziel)
+        if ziel_zeile is None:
+            ziel_zeile = self.anzahl_Spielsteine - 1
+        else:
+            ziel_zeile -= 1
+        self.Feld[ziel_zeile, ziel] = ring
+        self.zuege += 1
+        return True
+
+    def ist_geloest(self):
+        return all(self.Feld[i, 2] == i + 1 for i in range(self.anzahl_Spielsteine))
+
     def __str__(self):
         return str(self.Feld)
 
@@ -65,11 +85,14 @@ class Spielfeld():
         if self._fenster is None:
             self.fenster_oeffnen()
         pg, screen, n = self.pg, self._screen, self.anzahl_Spielsteine
+        self.tasten = []
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.display.quit()
                 self._fenster = None
                 return False
+            if event.type == pg.KEYDOWN:
+                self.tasten.append(event.unicode)
         screen.fill(self.Hintergrund)
         pg.draw.rect(screen, self.Boden, (30, self._boden_y, self._breite - 60, 10))
         for s in range(3):
@@ -85,5 +108,7 @@ class Spielfeld():
                                  (x - b // 2, y, b, self._ring_h - 4), border_radius=8)
         text = self._font.render(f"Züge: {self.zuege}", True, self.Text)
         screen.blit(text, (20, 15))
+        if info:
+            screen.blit(self._font.render(info, True, self.Text), (20, 50))
         pg.display.flip()
         return True

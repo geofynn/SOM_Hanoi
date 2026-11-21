@@ -1,4 +1,5 @@
 from Spielfeld import Spielfeld
+import time
 
 #KI-Spieler und Spieler sind zwei separate Klassen
 #Bezug zum Spielfeld 
@@ -10,35 +11,42 @@ from Spielfeld import Spielfeld
 #keine Reward Funktion - Hinweis nur über illegale Züge
 #Ausgabe über gewonnene Spiele und Anzahl der Züge
 
-
 class Spieler(Spielfeld):
     def __init__(self, anzahl_Spielsteine):
         super().__init__(anzahl_Spielsteine)
-
     def eingabe(self):
+        start = None
+        info = "Start-Stab wählen (Taste 1-3)"
         while True:
-            try:
-                start = int(input("Von Stab (1-3): ")) - 1
-                ziel = int(input("Auf Stab (1-3): ")) - 1
-            except ValueError:
-                print("Bitte eine Zahl eingeben.")
-                continue
-
-            if self.check_legal_move(start, ziel):
-                return start, ziel
-            print("Ungültiger Zug, bitte nochmal eine Zahl eingeben.")
+            if not self.zeige(info):
+                return None
+            for taste in self.tasten:
+                if taste not in ("1", "2", "3"):
+                    continue
+                stab = int(taste) - 1
+                if start is None:
+                    start = stab
+                    info = f"Von Stab {stab + 1} nach ... (Taste 1-3)"
+                elif self.check_legal_move(start, stab):
+                    return start, stab
+                else:
+                    info = "Ungültiger Zug! Start-Stab wählen (Taste 1-3)"
+                    start = None
+            time.sleep(0.02)
 
     def Spieler_aktion(self):
-        start, ziel = self.eingabe()
-        self.zug_ausfuehren(start, ziel)
-        
+        zug = self.eingabe()
+        if zug is None:
+            return False
+        self.zug_ausfuehren(*zug)
+        return True
 
     def spielen(self):
-        self.zeige()                      # Fenster öffnen, Startposition zeigen
         while not self.ist_geloest():
-            self.Spieler_aktion()         # Zug in der Konsole eingeben
-            self.zeige()                  # Fenster nach dem Zug neu zeichnen
-        print(f"Gewonnen in {self.zuege} Zügen! "
-              f"(optimal: {2 ** self.anzahl_Spielsteine - 1})")
-        
-        return
+            if not self.Spieler_aktion():
+                print("Spiel abgebrochen.")
+                return
+        self.zeige(f"Gewonnen in {self.zuege} Zügen! "
+                   f"(optimal: {2 ** self.anzahl_Spielsteine - 1})")
+        print(f"Gewonnen in {self.zuege} Zügen!")
+        time.sleep(3)

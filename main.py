@@ -8,9 +8,5 @@ print(Feld.check_legal_move(0, 0))
 print(Feld.check_legal_move(0, 3))  
  
 
-from Spieler import Spieler
-
-Spieler(3).spielen()
-
 while Feld.zeige():
     pass
