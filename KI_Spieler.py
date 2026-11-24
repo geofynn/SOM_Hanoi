@@ -1,3 +1,5 @@
+from tracemalloc import start
+
 from Spielfeld import Spielfeld
 from SOMPiBrain import SOMPiBrain
 from Spieler import Spieler
@@ -26,9 +28,22 @@ class KI_Spieler(Spielfeld):
                 if wert !=0:
                     state += stab*3**(wert-1)
         return state
+    
+    def zug_ausfuehren(self, start, ziel):
+        s_zeile = self.oberster_ring(start)    
+        z_zeile = self.oberster_ring(ziel)
+
+        if z_zeile is None:                          
+            neue_zeile = self.anzahl_Spielsteine - 1 
+        else:                                        
+            neue_zeile = z_zeile - 1  
+        self.Feld[neue_zeile, ziel] = self.Feld[s_zeile, start]   
+        self.Feld[s_zeile, start] = 0                             
+        self.zuege += 1 
 
     def KI_aktion(self, start, ziel):   
         return
+    
  
 #Bezug zu AKTIONEN in Spielfeld.py
 #Bezug zu state und action 
