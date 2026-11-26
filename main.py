@@ -18,7 +18,7 @@ print("Türme von Hanoi")
 print("1 = selbst spielen")
 print("2 = KI trainieren und spielen lassen")
 modus = zahl_abfragen("Modus: ", 1, 2)
-anzahl = zahl_abfragen("Anzahl Scheiben (3-5): ", 3, 5)
+anzahl = zahl_abfragen("Anzahl Scheiben (3-10): ", 3, 10)
 
 if modus == 1:
     spieler = Spieler(anzahl)

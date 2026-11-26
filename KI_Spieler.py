@@ -1,30 +1,19 @@
-from tracemalloc import start
+# @author Julian Kortz
+# source for pygame: https://www.pygame.org/docs/
 
+
+from tracemalloc import start
 from Spielfeld import Spielfeld
 from SOMPiBrain import SOMPiBrain
 from Spieler import Spieler
-
-
-#KI-Spieler und Spieler sind zwei separate Klassen
-#Bezug zum Spielfeld xxxx
-
-#Reward-Funktion
-#Reward_Ziel = 100
-#Reward_Zug = -1
-#Reward_illegal = -10
-
-#action_num = 6
-
-#Klasse KI_Spieler bezieht sich auf Spielfeld bzgl. legale Züge 
 import time
-from Spielfeld import Spielfeld, AKTIONEN
-from SOMPiBrain import SOMPiBrain
+
 
 #Reward-Funktion
 Reward_Ziel = 100
 Reward_Zug = -1
 Reward_illegal = -10
-
+AKTIONEN = [(0, 1), (0, 2), (1, 0), (1, 2), (2, 0), (2, 1)]
 
 class KI_Spieler(Spielfeld):
     def __init__(self, anzahl_Spielsteine):
