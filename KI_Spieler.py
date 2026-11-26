@@ -13,12 +13,11 @@ import time
 Reward_Ziel = 100
 Reward_Zug = -1
 Reward_illegal = -10
-AKTIONEN = [(0, 1), (0, 2), (1, 0), (1, 2), (2, 0), (2, 1)]
+AKTIONEN = [(0, 1), (0, 2), (1, 0), (1, 2), (2, 0), (2, 1)] #mögliche Aktionen: Stab 1 zu 2; Stab 1 zu 3...
 
 class KI_Spieler(Spielfeld):
     def __init__(self, anzahl_Spielsteine):
         super().__init__(anzahl_Spielsteine)
-        #state_num = 3^n (jede Scheibe auf einem von 3 Stäben), action_num = 6 (AKTIONEN)
         self.brain = SOMPiBrain(3 ** anzahl_Spielsteine, len(AKTIONEN), gamma=0.95)
 
     def get_state(self):
@@ -32,11 +31,11 @@ class KI_Spieler(Spielfeld):
 
     def step(self, action):
         start, ziel = AKTIONEN[action]
-        if not self.zug_ausfuehren(start, ziel):     # Spielfeld prüft selbst, ob der Zug legal ist
+        if not self.zug_ausfuehren(start, ziel):     # Spielfeld prüft ob der Zug legal ist
             return self.get_state(), Reward_illegal, False
 
-        done = self.ist_geloest()
-        reward = Reward_Ziel if done else Reward_Zug
+        done = self.ist_geloest()   # prüft ob das Spiel gelöst ist
+        reward = Reward_Ziel if done else Reward_Zug # Belohnung für die Lösung ansonsten Bestrafung
         return self.get_state(), reward, done
 
     def reset(self):
@@ -55,7 +54,7 @@ class KI_Spieler(Spielfeld):
                 state = self.brain.reward_action(state, next_state, action, reward)
         print("Training beendet.")
 
-    def vorfuehren(self, pause=0.7):
+    def vorfuehren(self, pause=0.7): #Pause damit man in der GUI die Züge sehen kann
         state = self.reset()
         done = False
         while not done:
@@ -72,9 +71,3 @@ class KI_Spieler(Spielfeld):
         while self.zeige(info):
             time.sleep(0.05)
  
-#Bezug zu AKTIONEN in Spielfeld.py
-#Bezug zu state und action 
-#training: keine Visualisierung, nur Berechnung der Züge und Rewards; Pause benötigt, um die Züge zu sehen
-#Belohnung bei optimalen Zügen (optimaler Zug = 2^Anzahl_Spielsteine - 1)
-#Vorführfunktion: Visualisierung über pygame in Spielfeld
-#Lernerfolg prüfen?
