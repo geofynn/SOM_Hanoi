@@ -47,6 +47,6 @@ class Spieler(Spielfeld):
                 print("Spiel abgebrochen.")
                 return
         self.zeige(f"Gewonnen in {self.zuege} Zügen! "
-                   f"(optimal: {2 ** self.anzahl_Spielsteine - 1})")
+                   f"(optimal: {self.optimal_zuege})")
         print(f"Gewonnen in {self.zuege} Zügen!")
         time.sleep(3)

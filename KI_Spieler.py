@@ -66,7 +66,7 @@ class KI_Spieler(Spielfeld):
             if reward == Reward_illegal:
                 print("Illegaler Zug - mehr trainieren!")
                 return
-        info = f"Gelöst in {self.zuege} Zügen (optimal: {2 ** self.anzahl_Spielsteine - 1})"
+        info = f"Gelöst in {self.zuege} Zügen (optimal: {self.optimal_zuege})"
         print(info)
         while self.zeige(info):
             time.sleep(0.05)

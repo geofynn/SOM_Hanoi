@@ -14,7 +14,8 @@ class Spielfeld():
         self.anzahl_Spielsteine = anzahl_Spielsteine
         self.Feld = np.zeros([anzahl_Spielsteine, 3], dtype=int)
         self.create_spielfeld()
-        self._fenster = None  
+        self._fenster = None
+        self.optimal_zuege = 2 ** self.anzahl_Spielsteine - 1
 
     def create_spielfeld(self):
         self.zuege = 0
