@@ -1,14 +1,9 @@
+# @author Fynn Barmwater
+
 import numpy as np
-
-
-            
+      
 class Spielfeld():
-    Hintergrund = (30, 30, 46)
-    Boden = (90, 90, 110)
-    Stab = (160, 160, 180)
-    Text = (230, 230, 240)
-    FARBEN = [(230, 80, 80), (240, 160, 60), (230, 220, 70),
-              (80, 200, 110), (70, 170, 230), (150, 100, 230)]
+    
 
     def __init__(self, anzahl_Spielsteine):
         self.anzahl_Spielsteine = anzahl_Spielsteine
@@ -16,6 +11,13 @@ class Spielfeld():
         self.create_spielfeld()
         self._fenster = None
         self.optimal_zuege = 2 ** self.anzahl_Spielsteine - 1
+        self.Hintergrund = (30, 30, 46)
+        self.Boden = (90, 90, 110)
+        self.Stab = (160, 160, 180)
+        self.Text = (230, 230, 240)
+        self.FARBEN = [(230, 80, 80), (240, 160, 60), (230, 220, 70),
+              (80, 200, 110), (70, 170, 230), (150, 100, 230)]
+
 
     def create_spielfeld(self):
         self.zuege = 0
